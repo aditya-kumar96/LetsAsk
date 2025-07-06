@@ -12,9 +12,10 @@ function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={styles.container}>
+    <View className='flex-1 justify-center items-center bg-black'  >
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text >Welcome to LetsAsk</Text>
+      <Text className="text-xl text-white font-bold">Welcome to LetsAsk</Text>
+      <Text className='text-lg text-white font-bold'>Ask me Anything ...</Text>
     </View>
   );
 }
