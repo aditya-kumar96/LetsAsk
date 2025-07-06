@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@react-native/new-app-screen": "0.80.1",
+    "clsx": "^2.1.1",
     "nativewind": "^4.1.23",
     "react": "19.1.0",
     "react-native": "0.80.1",
     "react-native-reanimated": "^3.18.0",
-    "react-native-safe-area-context": "^5.4.0"
+    "react-native-safe-area-context": "^5.4.0",
+    "react-native-vector-icons": "^10.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

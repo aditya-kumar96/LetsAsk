@@ -6,25 +6,25 @@
  */
 
 import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import MessageInput from './src/component/MessageInput';
+import ChatScreen from './src/ChatScreen';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
-  return (
-    <View className='flex-1 justify-center items-center bg-black'  >
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text className="text-xl text-white font-bold">Welcome to LetsAsk</Text>
-      <Text className='text-lg text-white font-bold'>Ask me Anything ...</Text>
-    </View>
-  );
+  const onSubmit = () => {
+    console.log('updated')
+  }
+
+  return  <ChatScreen />;;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent:'center',
-    alignItems:'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 
