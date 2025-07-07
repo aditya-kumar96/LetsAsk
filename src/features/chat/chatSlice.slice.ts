@@ -48,6 +48,7 @@ type Message = {
 
       })
         .addCase(sendMessage.fulfilled, (state, action) => {
+            console.log(state)
           state.messages.push({
             id: Date.now().toString() + '-bot',
             text: action.payload,
@@ -56,6 +57,7 @@ type Message = {
           state.isTyping = false;
         })
         .addCase(sendMessage.rejected, (state) => {
+            console.log(state)
           state.isTyping = false;
         });
     },
