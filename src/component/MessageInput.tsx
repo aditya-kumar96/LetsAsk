@@ -1,43 +1,79 @@
-import clsx from 'clsx';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { useState } from 'react';
-import { Keyboard, TextInput, TextInputProps, View } from 'react-native';
+import {
+    View,
+    TextInput,
+    TouchableOpacity,
+    Keyboard,
+    StyleSheet,
+    TextInputProps,
+} from 'react-native';
 
-type MessageInputProps = {
-  message?: string;
-  onSubmit: (message: string) => void;
+
+type Props = {
+    message?: string;
+    onSubmit: (message: string) => void;
+
 } & TextInputProps;
 
-const   MessageInput = ({ message='', onSubmit, className, ...rest }: MessageInputProps) => {
-  const [msg, setMsg] = useState(message || '');
+const MessageInput = ({ message = '', onSubmit, ...rest }: Props) => {
+    const [msg, setMsg] = useState(message);
 
-  const classes = clsx(
-    'bg-white text-black px-4 py-3 rounded-full border border-gray-300 text-base',
-    className
-  );
+    const handleSubmit = () => {
+        const trimmed = msg.trim();
+        if (!trimmed) return;
 
+        onSubmit(trimmed);
+        setMsg('');
+        Keyboard.dismiss();
+    };
 
-  const handleSubmit = () => {
-    const trimmed = msg.trim();
-    if (!trimmed) return;
-
-    onSubmit(trimmed);
-    setMsg('');
-    Keyboard.dismiss();
-  };
-
-  return (
-    <View className="p-2">
-      <TextInput
-        value={msg}
-        onChangeText={setMsg}
-        onSubmitEditing={handleSubmit}
-        returnKeyType="send"
-        placeholder="Type your message..."
-        className={classes}
-        {...rest}
-      />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <TextInput
+                value={msg}
+                onChangeText={setMsg}
+                onSubmitEditing={handleSubmit}
+                returnKeyType="send"
+                style={styles.input}
+                placeholderTextColor="#888"
+                {...rest}
+            />
+            <TouchableOpacity
+                onPress={handleSubmit}
+                style={styles.sendBtn}
+                disabled={!msg.trim()}
+            >
+                <Icon name="send" size={24} color='white' />
+            </TouchableOpacity>
+        </View>
+    );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        backgroundColor: 'black',
+        borderTopWidth: 1,
+        borderTopColor: '#e2e2e2',
+    },
+    input: {
+        flex: 1,
+        backgroundColor: 'white',
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        borderRadius: 20,
+        fontSize: 16,
+        color: 'black',
+    },
+    sendBtn: {
+        marginLeft: 10,
+        padding: 6,
+        flex:0.09
+    },
+});
 
 export default MessageInput;
